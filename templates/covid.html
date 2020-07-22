@@ -28,20 +28,11 @@ li a {
 li a:hover {
   background-color: #111;
 }
-/* Create three unequal columns that floats next to each other */
+/* Create three equal columns that floats next to each other */
 .column {
   float: left;
-  padding: 10px;
-}
-
-/* Left and right column */
-.column.side {
-  width: 20%;
-}
-
-/* Middle column */
-.column.middle {
-  width: 40%;
+  width: 27.33%;
+  padding: 15px;
 }
 
 /* Clear floats after the columns */
@@ -52,9 +43,9 @@ li a:hover {
 }
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column.side, .column.middle {
-    width: 75%;
+@media screen and (max-width:600px) {
+  .column {
+    width: 100%;
   }
 }
 </style>
@@ -62,29 +53,25 @@ li a:hover {
 <ul>
   <li><a class="active" href="#63342/project-air/templates/index.html?_ijt=5v19fqn8rn8ho505a0hm5lcn0g">Home</a></li>
   <li><a href="http://localhost:63342/project-air/templates/covid.html?_ijt=dgi15lmtfvcnncho8fa6r2di7c#">covid</a></li>
-  <li><a href="#contact">Contact</a></li>
+  <li><a href="http://localhost:63342/project-air/templates/data.html?_ijt=80ge6an76b3kl1r9m337qcobkr">Data</a></li>
   <li><a href="#about">About</a></li>
 </ul>
 <div class="row">
-  <div class="column side">
-    <h2>Side</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-  </div>
-
-  <div class="column middle">
-    <h2>Main Content</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  <div class="column">
+    <h2>Column</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
   </div>
 
-  <div class="column side">
-    <p>Click on the "Choose File" button to upload a file:</p>
+  <div class="column">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+  </div>
 
-<form action="/action_page.php">
-  <input type="file" id="myFile" name="filename">
-  <input type="submit">
-</form>
+  <div class="column">
+    <h2>Column</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
   </div>
 </div>
+
 </body>
 </html>
