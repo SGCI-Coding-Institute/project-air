@@ -3,7 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>SGCI - Covid Research</title>
-</head>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Covid Data"
+	},
+	axisY:{
+		includeZero: false
+	},
+	data: [{
+		type: "line",
+      	indexLabelFontSize: 16,
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414 },
+			{ y: 520, indexLabel: "\u2191 highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+			{ y: 450 },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 480 },
+			{ y: 410 , indexLabel: "\u2193 lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 510 }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+  </head>
 <style>
 ul {
   list-style-type: none;
@@ -73,14 +108,21 @@ li a:hover {
 
   <div class="column middle">
     <h2>Main Content</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
+    <p>
+<!--      {% for e in l %}-->
+<!--        {{e}}-->
+<!--      {% endfor %}-->
+      <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    </p>
+
   </div>
 
   <div class="column side">
     <p>Click on the "Choose File" button to upload a file:</p>
 
-<form action="/action_page.php">
+<form action="/action_page.html">
   <input type="file" id="myFile" name="filename">
   <input type="submit">
 </form>
