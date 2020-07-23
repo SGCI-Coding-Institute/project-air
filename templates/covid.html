@@ -95,15 +95,19 @@ li a:hover {
 </style>
 <body>
 <ul>
-  <li><a class="active" href="#63342/project-air/templates/index.html?_ijt=5v19fqn8rn8ho505a0hm5lcn0g">Home</a></li>
-  <li><a href="http://localhost:63342/project-air/templates/covid.html?_ijt=dgi15lmtfvcnncho8fa6r2di7c#">covid</a></li>
+  <li><a class="active" href="http://localhost:5001/">Home</a></li>
+  <li><a href="http://localhost:5001/covid">covid</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
 </ul>
 <div class="row">
   <div class="column side">
     <h2>Side</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+    <p>
+        {% for e in l %}
+            {{e}}
+        {% endfor %}
+    </p>
   </div>
 
   <div class="column middle">

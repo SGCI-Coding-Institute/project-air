@@ -31,9 +31,9 @@ li a:hover {
 
 
 <ul>
-  <li><a class="active" href="#63342/project-air/templates/index.html?_ijt=5v19fqn8rn8ho505a0hm5lcn0g">Home</a></li>
-  <li><a href="http://localhost:63342/project-air/templates/covid.html?_ijt=dgi15lmtfvcnncho8fa6r2di7c#">covid</a></li>
-  <li><a href="http://localhost:63342/project-air/templates/data.html?_ijt=gu1qj8fhnefrjv4d9hi8a7err3">Data</a></li>
+  <li><a class="active" href="http://localhost:5001/">Home</a></li>
+  <li><a href="http://localhost:5001/covid">covid</a></li>
+  <li><a href="http://localhost:5001/upload">Data</a></li>
   <li><a href="#about">About</a></li>
 </ul>
 
@@ -41,9 +41,10 @@ li a:hover {
 
 <p>Click on the "Choose File" button to upload a file:</p>
 
-<form action="/action_page.php">
-  <input type="file" id="myFile" name="filename">
-  <input type="submit">
+<form action= "http://localhost:5001/uploader" method = "POST"
+         enctype = "multipart/form-data">
+  <input type = "file" name = "file" />
+  <input type = "submit"/>
 </form>
 
 <script>
