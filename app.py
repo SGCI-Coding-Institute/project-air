@@ -1,17 +1,23 @@
 import csv
-
-from flask import Flask, render_template, request
-from csv import DictReader
+import os
+# from collections import OrderedDict
+# from csv import DictReader
+# from typing import Dict, Union
 from urllib.request import urlretrieve as retrieve
+from werkzeug.utils import secure_filename
+# from _collections import defaultdict
+
+from flask import Flask, render_template, request, redirect, flash, url_for
 
 app = Flask(__name__)
 
-upload_folder = 'uploads'
-allowed_extensions = set(['csv'])
-app.config['upload_folder'] = upload_folder
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'csv'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 # Function to connect our HTML file
-# TODO: Expand on our base HTML page to provide more details about our project and add links to view our other /.. pages
+# TODO: Expand on our base HTML page to provide more details about our project and add links to view our other /.. pages - Done
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -22,32 +28,60 @@ def index():
 @app.route('/covid')
 def import_covid_csv():
     url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv'
-    retrieve(url, 'us.csv')
+    retrieve(url, 'covid_file/us.csv')
 
-    with open('us.csv', 'r') as covidfile:
+    with open('covid_file/us.csv', 'r') as covidfile:
         csv_read = csv.DictReader(covidfile)
-        print(csv_read)
+        #print(csv_read)
         covid_list = []
 
-        for row in csv_read:
-            print(row)
-            covid_list.append(row)
+        for i in csv_read:
+            # print(i)
+            date = i['date']
+            cases = i['cases']
+            deaths = i['deaths']
+            # print(date, cases, deaths)
+            covid_list.append({'date': date, 'cases': cases, 'deaths': deaths})
+            # print(covid_list)
 
         return render_template('covid.html', l=covid_list)
 
 
-# Function to get a Flu data file and display the contents of it
-# TODO: Make it so that we get this file from user upload/input
-@app.route('/virus')
-def import_second_csv():
-    # Opening our test Flu file in a read status
-    file = open('/Users/hectorsantiago/Downloads/NCHS_-_Leading_Causes_of_Death__United_States.csv', 'r')
-    with file:
-        reader = DictReader(file)
-        # Getting data only from the year 2017
-        rows = [row for row in reader if row['\ufeffYear'] == '2017' and row['State'] == 'United States']
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-        return str(rows)
+
+@app.route('/upload')
+def upload_file():
+    return render_template('data.html')
+
+
+# Function to get a data file and display the contents of it
+# TODO: Make it so that we get this file from user upload/input -Done
+@app.route('/uploader', methods=['GET', 'POST'])
+def get_second_csv():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload_file',
+                                    filename=filename))
+    return render_template('data.html')
+
+
+def compute_csv(covid, second_csv):
+    pass
 
 
 if __name__ == "__main__":
