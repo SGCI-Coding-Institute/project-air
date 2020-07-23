@@ -23,6 +23,11 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/about')
+def about():
+    return render_template('aboutus.html')
+
+
 # Function to get a COVID-19 data file and display the contents of it
 # TODO: Make it so that we get this file from user url -Done
 @app.route('/covid')
