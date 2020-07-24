@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>SGCI - Covid Research</title>
-</head>
 <style>
 ul {
   list-style-type: none;
@@ -14,7 +13,7 @@ ul {
 }
 
 li {
-  float: left;
+  float: center;
 }
 
 li a {
@@ -26,16 +25,110 @@ li a {
 }
 
 li a:hover {
-  background-color: #111;
+  background-color: #8A0808;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-color: #585858;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+nav {
+  float: left;
+  width: 30%;
+  height: 500px;
+  background: #BDBDBD;
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  width:100%;
+
+}
+
+article {
+  float: left;
+  padding: 40px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 500px;
+}
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+footer {
+  background-color: #585858;
+  padding: 30px;
+  text-align: center;
+  color: white;
+}
+
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
 }
 </style>
-<h1>CDC COVID-19 mortality data</h1>
+</head>
 <body>
-<ul>
-  <li><a class="active" href="http://localhost:5001/">Home</a></li>
-  <li><a href="http://localhost:5001/covid">COVID</a></li>
-  <li><a href="http://localhost:5001/upload">Data</a></li>
-  <li><a href="http://localhost:5001/about">About</a></li>
-</ul>
+
+<header>
+  <h2>CDC COVID-19 Mortality Data</h2>
+</header>
+
+<section>
+  <nav>
+    <ul>
+      <li><a class="active" href="http://localhost:63342/project-air/templates/index.html?_ijt=gu1qj8fhnefrjv4d9hi8a7err3">Home</a></li>
+        <li><a href="http://localhost:63342/project-air/templates/covid.html?_ijt=dgi15lmtfvcnncho8fa6r2di7c#">COVID</a></li>
+        <li><a href="#http://localhost:63342/project-air/templates/data.html?_ijt=80ge6an76b3kl1r9m337qcobkr">Data</a></li>
+        <li><a href="http://localhost:63342/project-air/templates/aboutus.html?_ijt=o8u66erc6sbnvfc5qp3ogc25l4">About</a></li>
+        <li><img src="http://1.bp.blogspot.com/-ebZSX7hCmtQ/VQKrh6XLtKI/AAAAAAAAAQI/OPH7rf4s-q4/s1600/Human_imminodeficiency_virus_2173884_1.jpg"
+        alt="virus" width=100% length=90% </li>
+    </ul>
+  </nav>
+
+  <article>
+    <h2>Stay Updated!</h2>
+    <p>The COVID-19 pandemic is dangerous and unpredictable. We created this site
+      to try and help keep users informed with the death rates of COVID-19 and other viruses to show users how the death
+      rates compare.</p>
+
+    <h3>Our Goal</h3>
+      <p>The purpose of the data is to compare the COVID-19 mortality rate to other deadly viruses
+      we've had in the past.
+       </p>
+
+    <h4>Help us help you...</h4>
+    <p>We give you the option to upload your own csv file with data on cases and deaths of other viruses or tragedies
+      so you can compare with the data provided.</p>
+    <p>Download the csv file below to upload additional data. </p>
+    <p><a target="_blank" href=“example.csv">Example CSV File</a></p>
+  </article>
+</section>
+
+<footer>
+  <p>If you have any questions or concerns contact:</p>
+</footer>
+
 </body>
 </html>
