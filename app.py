@@ -17,7 +17,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 # Function to connect our HTML file
-# TODO: Expand on our base HTML page to provide more details about our project and add links to view our other /.. pages - Done
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -29,7 +28,6 @@ def about():
 
 
 # Function to get a COVID-19 data file and display the contents of it
-# TODO: Make it so that we get this file from user url -Done
 @app.route('/covid')
 def import_covid_csv():
     url = 'https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv'
@@ -40,16 +38,28 @@ def import_covid_csv():
         #print(csv_read)
         covid_list = []
 
-        for i in csv_read:
-            # print(i)
-            date = i['date']
-            cases = i['cases']
-            deaths = i['deaths']
-            # print(date, cases, deaths)
+        # For loop to get the last 7 days of Covid Data
+        for j in list(reversed(list(csv_read)))[0:7]:
+            #print(j)
+            date = j['date']
+            cases = j['cases']
+            deaths = j['deaths']
             covid_list.append({'date': date, 'cases': cases, 'deaths': deaths})
-            # print(covid_list)
 
-        return render_template('covid.html', l=covid_list)
+        # Function to compute and display the COVID-19 death rate
+        def compute_csv():
+            data = []
+            with open('covid_file/us.csv', 'r') as covidfile:
+                csv_read = csv.DictReader(covidfile)
+                for i in list(reversed(list(csv_read))):
+                    # print(i)
+                    cases = i['cases']
+                    deaths = i['deaths']
+                    rate = int(deaths) / int(cases)
+                    data.append({'cases': cases, 'deaths': deaths, 'rate': rate})
+                    return data
+
+        return render_template('covid.html', l=covid_list, k=compute_csv())
 
 
 def allowed_file(filename):
@@ -63,7 +73,6 @@ def upload_file():
 
 
 # Function to get a data file and display the contents of it
-# TODO: Make it so that we get this file from user upload/input -Done
 @app.route('/uploader', methods=['GET', 'POST'])
 def get_second_csv():
     if request.method == 'POST':
@@ -72,22 +81,21 @@ def get_second_csv():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit an empty part without filename
+        # if user does not select file, browser also submits an empty part without filename
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            flash('Successful')
             return redirect(url_for('upload_file',
                                     filename=filename))
     return render_template('data.html')
 
 
-def compute_csv(covid, second_csv):
-    pass
-
+app.secret_key = 'some_secret_key'
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
+

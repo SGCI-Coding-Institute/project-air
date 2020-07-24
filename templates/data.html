@@ -38,12 +38,12 @@ li a:hover {
 </ul>
 
 <h2>Upload your file of Data</h2>
-
 <p>Click on the "Choose File" button to upload a file:</p>
 
-<form action="/action_page.php">
-  <input type="file" id="myFile" name="filename">
-  <input type="submit">
+<form action= "http://localhost:5001/uploader" method = "POST"
+         enctype = "multipart/form-data">
+  <input type = "file" name = "file" />
+  <input type = "submit"/>
 </form>
 
 <script>
